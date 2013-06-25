@@ -1,0 +1,15 @@
+.yui3-colorpickerhsb .color-control {
+    background: url(../../img/color-control-overlay.png);
+}
+
+.color-control .color-selector {
+    background: url(../../img/color-selector.png);
+}
+
+.yui3-colorpickerhsb .hue-control {
+    background: url(../../img/hue-control-overlay.png);
+}
+
+.hue-control .hue-selector {
+    background: url(../../img/hue-selector.png);
+}
