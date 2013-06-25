@@ -3,10 +3,11 @@
     "builds": {
         "gallery-color-picker-hsb": {
             "jsfiles": [
+                "template.js",
                 "color-picker-hsb.js"
             ],
             "config" : {
-                "use" : [ "base", "node" ]
+                "use" : [ "base", "widget", "node" ]
             }
         }
     }

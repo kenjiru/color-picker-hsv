@@ -3,4 +3,6 @@ YUI().use('node', 'gallery-color-picker-hsb', function(Y){
 
     var placeHolder = Y.one('#colorPicker'),
         colorPicker = new Y.ColorPickerHsb();
+
+    colorPicker.render(placeHolder);
 });
