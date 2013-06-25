@@ -1,8 +1,8 @@
 var COLOR_PICKER_HSB_TEMPLATE = "" +
-    "<div class='color'>" +
+    "<div class='color-control'>" +
     "    <div class='color-selector'></div>" +
     "</div>" +
-    "<div class='hue'>" +
+    "<div class='hue-control'>" +
     "    <div class='hue-selector'></div>" +
     "</div>" +
     "<div class='values'>" +
