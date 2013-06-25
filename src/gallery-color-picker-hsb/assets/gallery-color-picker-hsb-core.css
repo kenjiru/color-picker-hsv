@@ -1,3 +1,70 @@
-body {
-    background-color: lightgreen;
+.yui3-colorpickerhsb {
+    position: absolute;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+/* clear the float left */
+.yui3-colorpickerhsb:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+.yui3-colorpickerhsb .color {
+    position: relative;
+    float: left;
+    width: 150px;
+    height: 150px;
+    border: 2px solid darkgrey;
+}
+
+.yui3-colorpickerhsb .color .color-selector {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border: 1px solid red;
+}
+
+.yui3-colorpickerhsb .hue {
+    float: left;
+    margin-left: 10px;
+    width: 20px;
+    height: 150px;
+    border: 2px solid darkgrey;
+}
+
+.yui3-colorpickerhsb .values {
+    float: left;
+    margin-left: 10px;
+    width: 170px;
+    height: 150px;
+    border: 1px solid grey;
+}
+
+.values .selected-color {
+    width: 40px;
+    height: 30px;
+    border: 1px solid gray;
+    margin: 5px;
+}
+
+.values .value {
+    float: left;
+    width: 60px;
+    margin-left: 10px;
+}
+
+.value label {
+    display: inline-block;
+    width: 16px;
+}
+
+.value input {
+    width: 35px;
 }
