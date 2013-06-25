@@ -1,0 +1,10 @@
+{
+    "name": "gallery-color-picker-hsb",
+    "builds": {
+        "gallery-color-picker-hsb": {
+            "jsfiles": [
+                "js/gallery-color-picker-hsb.js"
+            ]
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "name"       : "gallery-color-picker-hsb",
+    "displayName": "Gallery: gallery-color-picker-hsb",
+    "description": "*Summary Goes Here*",
+    "author"     : [ "kenjiru" ],
+    "use"        : [ "gallery-color-picker-hsb" ],
+
+    "tags": [ "gallery" ],
+
+    "examples": []
+}
