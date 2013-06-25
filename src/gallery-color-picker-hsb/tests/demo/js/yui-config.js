@@ -13,7 +13,9 @@ YUI_config = {
             base: '/build/',
 
             modules: {
-                'gallery-color-picker-hsb' : {}
+                'gallery-color-picker-hsb' : {
+                    'skinnable': true
+                }
             }
         }
     }

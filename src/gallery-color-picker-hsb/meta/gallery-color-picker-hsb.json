@@ -2,6 +2,7 @@
     "gallery-color-picker-hsb": {
         "requires": [
             "yui-base"
-        ]
+        ],
+        "skinnable": true
     }
 }
