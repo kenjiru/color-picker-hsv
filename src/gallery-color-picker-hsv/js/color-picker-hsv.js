@@ -169,6 +169,18 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         }
     },
 
+    _updateRgbFromHex : function() {
+        var hexStr = '#' + this._hex.get('value'),
+            rgbStr = Y.Color.toRGB(hexStr),
+            rgbArr = Y.Color.toArray(rgbStr);
+
+        this._r.set('value', rgbArr[0]);
+        this._g.set('value', rgbArr[1]);
+        this._b.set('value', rgbArr[2]);
+
+        this._updateHueSelector();
+    },
+
     _updateHexFromRgb : function(moveHueSelector) {
         var r = this._r.get('value'),
             g = this._g.get('value'),
@@ -195,18 +207,6 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._v.set('value', hsvArr[2]);
 
         this._updateColorSelector();
-    },
-
-    _updateRgbFromHex : function() {
-        var hexStr = '#' + this._hex.get('value'),
-            rgbStr = Y.Color.toRGB(hexStr),
-            rgbArr = Y.Color.toArray(rgbStr);
-
-        this._r.set('value', rgbArr[0]);
-        this._g.set('value', rgbArr[1]);
-        this._b.set('value', rgbArr[2]);
-
-        this._updateHueSelector();
     },
 
     _updateColorSelector : function() {
