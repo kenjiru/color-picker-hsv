@@ -7,7 +7,7 @@
                 "color-picker-hsv.js"
             ],
             "config" : {
-                "use" : [ "base", "widget", "node", "color-hsv" ]
+                "use" : [ "base", "widget", "node", "color-hsv", "event-delegate", "event-valuechange" ]
             }
         }
     }

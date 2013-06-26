@@ -46,11 +46,17 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
     },
 
     bindUI : function() {
+        var contentBox = this.get('contentBox');
+
         this._colorControl.on('mousedown', this._changeColor, this);
         this._colorControl.on('mousemove', this._changeColor, this);
 
         this._hueControl.on('mousedown', this._changeHue, this);
         this._hueControl.on('mousemove', this._changeHue, this);
+
+        contentBox.delegate('valuechange', this._rgbChanged, '.rgb input', this);
+        contentBox.delegate('valuechange', this._hsvChanged, '.hsv input', this);
+        contentBox.delegate('valuechange', this._hexChanged, '.hex input', this);
     },
 
     _changeColor : function(e) {
@@ -90,6 +96,27 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._setHue(y);
         this._updateRgbFromHsv();
         this._updateHexFromRgb();
+    },
+
+    _rgbChanged : function() {
+        console.log('_rgbChanged');
+
+        this._updateHsvFromRgb();
+        this._updateHexFromRgb();
+    },
+
+    _hsvChanged : function() {
+        console.log('_hsvChanged');
+
+        this._updateRgbFromHsv();
+        this._updateHexFromRgb();
+    },
+
+    _hexChanged : function() {
+        console.log('_hexChanged');
+
+        this._updateRgbFromHex();
+        this._updateHsvFromRgb();
     },
 
     _setRgb: function(rgbColor) {
@@ -159,6 +186,16 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._h.set('value', hsvArr[0]);
         this._s.set('value', hsvArr[1]);
         this._v.set('value', hsvArr[2]);
+    },
+
+    _updateRgbFromHex : function() {
+        var hexStr = '#' + this._hex.get('value'),
+            rgbStr = Y.Color.toRGB(hexStr),
+            rgbArr = Y.Color.toArray(rgbStr);
+
+        this._r.set('value', rgbArr[0]);
+        this._g.set('value', rgbArr[1]);
+        this._b.set('value', rgbArr[2]);
     }
 }, {
     ATTRS : {
