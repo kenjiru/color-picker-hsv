@@ -1,10 +1,10 @@
 {
-    "name": "gallery-color-picker-hsb",
+    "name": "gallery-color-picker-hsv",
     "builds": {
-        "gallery-color-picker-hsb": {
+        "gallery-color-picker-hsv": {
             "jsfiles": [
                 "template.js",
-                "color-picker-hsb.js"
+                "color-picker-hsv.js"
             ],
             "config" : {
                 "use" : [ "base", "widget", "node" ]

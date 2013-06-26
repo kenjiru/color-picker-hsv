@@ -1,6 +1,6 @@
 YUI.add('module-tests', function(Y) {
 
-    var suite = new Y.Test.Suite('gallery-color-picker-hsb');
+    var suite = new Y.Test.Suite('gallery-color-picker-hsv');
 
     suite.add(new Y.Test.Case({
         name: 'Automated Tests',

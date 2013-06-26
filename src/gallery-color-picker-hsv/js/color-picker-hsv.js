@@ -1,4 +1,4 @@
-Y.ColorPickerHsb = Y.Base.create('colorPickerHsb', Y.Widget, [], {
+Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
     CONTENT_TEMPLATE : null,
     _colorControl: null,
     _colorSelector : null,
@@ -6,13 +6,13 @@ Y.ColorPickerHsb = Y.Base.create('colorPickerHsb', Y.Widget, [], {
     _hueSelector : null,
 
     initializer : function(config) {
-        console.log('ColorPickerHsb initialized!');
+        console.log('ColorPickerHsv initialized!');
     },
 
     renderUI : function() {
         var contentBox = this.get('contentBox');
 
-        contentBox.append(COLOR_PICKER_HSB_TEMPLATE);
+        contentBox.append(COLOR_PICKER_HSV_TEMPLATE);
 
         this._colorControl = contentBox.one('.color-control');
         this._colorSelector = contentBox.one('.color-selector');

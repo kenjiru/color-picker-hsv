@@ -1,5 +1,5 @@
 {
-    "gallery-color-picker-hsb": {
+    "gallery-color-picker-hsv": {
         "requires": [
             "yui-base"
         ],

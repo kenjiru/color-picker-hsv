@@ -1,4 +1,4 @@
-var COLOR_PICKER_HSB_TEMPLATE = "" +
+var COLOR_PICKER_HSV_TEMPLATE = "" +
     "<div class='color-control'>" +
     "    <div class='color-selector'></div>" +
     "</div>" +
@@ -28,8 +28,8 @@ var COLOR_PICKER_HSB_TEMPLATE = "" +
     "       <input id='s'/>" +
     "   </div>" +
     "   <div class='value'>" +
-    "       <label for='b'>B</label>" +
-    "       <input id='b'/>" +
+    "       <label for='v'>V</label>" +
+    "       <input id='v'/>" +
     "   </div>" +
     "   <div class='value'>" +
     "       <label for='hex'>#</label>" +

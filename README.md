@@ -1,2 +1,2 @@
-color-picker-hsb
+color-picker-hsv
 ================
