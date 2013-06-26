@@ -59,17 +59,14 @@
     border: 1px solid grey;
 }
 
-.values .selected-color {
-    width: 40px;
-    height: 30px;
-    border: 1px solid gray;
-    margin: 5px;
-}
-
 .values .value {
     float: left;
-    width: 70px;
     margin-left: 10px;
+    width: 70px;
+}
+
+.values .hex {
+    width: 110px;
 }
 
 .value label {
@@ -79,4 +76,15 @@
 
 .value input {
     width: 35px;
+}
+
+.value input#hex {
+    width: 60px;
+}
+
+.values .selected-color {
+    width: 40px;
+    height: 30px;
+    border: 1px solid gray;
+    margin: 5px;
 }
