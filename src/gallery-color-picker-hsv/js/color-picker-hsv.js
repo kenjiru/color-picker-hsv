@@ -142,17 +142,6 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._h.set('value', h);
     },
 
-    _moveColorSelector : function(point) {
-        this._colorSelector.setStyles({
-            'left' : point.x - 8,
-            'top' : point.y - 8
-        });
-    },
-
-    _moveHueSelector : function(y) {
-        this._hueSelector.setStyle('top', y - 8);
-    },
-
     _updateRgbFromHsv : function(moveColorSelector) {
         var h = this._h.get('value'),
             s = this._s.get('value'),
@@ -213,16 +202,28 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         var s = this._s.get('value'),
             v = this._v.get('value');
 
-        this._colorSelector.setStyles({
-            left: parseInt(150 * s/100, 10),
-            top: parseInt(150 * (100-v)/100, 10)
+        this._moveColorSelector({
+            x: parseInt(150 * s/100, 10),
+            y: parseInt(150 * (100-v)/100, 10)
         });
     },
 
     _updateHueSelector : function() {
-        var h = this._h.get('value');
+        var h = this._h.get('value'),
+            y = parseInt(150 - 150 * h/360, 10);
 
-        this._hueSelector.setStyle('top', parseInt(150 - 150 * h/360, 10));
+        this._moveHueSelector(y);
+    },
+
+    _moveColorSelector : function(point) {
+        this._colorSelector.setStyles({
+            'left' : point.x - 8,
+            'top' : point.y - 8
+        });
+    },
+
+    _moveHueSelector : function(y) {
+        this._hueSelector.setStyle('top', y - 8);
     }
 }, {
     ATTRS : {
