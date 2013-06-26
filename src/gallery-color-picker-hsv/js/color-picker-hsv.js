@@ -76,8 +76,8 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
 
         this._moveColorSelector(point);
         this._setSaturationAndValue(point);
-        this._updateRgbFromHsv();
-        this._updateHexFromRgb();
+        this._updateRgbFromHsv(false);
+        this._updateHexFromRgb(false);
     },
 
     _changeHue : function(e) {
@@ -94,8 +94,8 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
 
         this._moveHueSelector(y);
         this._setHue(y);
-        this._updateRgbFromHsv();
-        this._updateHexFromRgb();
+        this._updateRgbFromHsv(false);
+        this._updateHexFromRgb(false);
     },
 
     _rgbChanged : function() {
@@ -153,20 +153,23 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._hueSelector.setStyle('top', y - 8);
     },
 
-    _updateRgbFromHsv : function() {
+    _updateRgbFromHsv : function(moveColorSelector) {
         var h = this._h.get('value'),
             s = this._s.get('value'),
             v = this._v.get('value'),
             hsvStr = Y.Color.fromArray([h, s, v], Y.Color.TYPES.HSV),
-            rgbArr = Y.Color._hsvToRgb(hsvStr, true),
-            hexStr = Y.Color.toHex(hsvStr);
+            rgbArr = Y.Color._hsvToRgb(hsvStr, true);
 
         this._r.set('value', rgbArr[0]);
         this._g.set('value', rgbArr[1]);
         this._b.set('value', rgbArr[2]);
+
+        if (typeof moveColorSelector == 'undefined' || moveColorSelector) {
+            this._updateColorSelector();
+        }
     },
 
-    _updateHexFromRgb : function() {
+    _updateHexFromRgb : function(moveHueSelector) {
         var r = this._r.get('value'),
             g = this._g.get('value'),
             b = this._b.get('value'),
@@ -174,6 +177,10 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
             hexStr = Y.Color.toHex(rgbStr);
 
         this._hex.set('value', hexStr.substr(1));
+
+        if (typeof moveHueSelector == 'undefined' || moveHueSelector) {
+            this._updateHueSelector();
+        }
     },
 
     _updateHsvFromRgb : function() {
@@ -186,6 +193,8 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._h.set('value', hsvArr[0]);
         this._s.set('value', hsvArr[1]);
         this._v.set('value', hsvArr[2]);
+
+        this._updateColorSelector();
     },
 
     _updateRgbFromHex : function() {
@@ -196,6 +205,24 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._r.set('value', rgbArr[0]);
         this._g.set('value', rgbArr[1]);
         this._b.set('value', rgbArr[2]);
+
+        this._updateHueSelector();
+    },
+
+    _updateColorSelector : function() {
+        var s = this._s.get('value'),
+            v = this._v.get('value');
+
+        this._colorSelector.setStyles({
+            left: parseInt(150 * s/100, 10),
+            top: parseInt(150 * (100-v)/100, 10)
+        });
+    },
+
+    _updateHueSelector : function() {
+        var h = this._h.get('value');
+
+        this._hueSelector.setStyle('top', parseInt(150 - 150 * h/360, 10));
     }
 }, {
     ATTRS : {
