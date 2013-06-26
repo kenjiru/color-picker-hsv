@@ -10,6 +10,7 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
     _h : null,
     _s : null,
     _v : null,
+    _hex : null,
 
     initializer : function(config) {
         console.log('ColorPickerHsv initialized!');
@@ -35,8 +36,12 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._s = contentBox.one('#s');
         this._v = contentBox.one('#v');
 
+        this._hex = contentBox.one('#hex');
+
         if (color) {
             this._setRgb(color);
+            this._updateHsvFromRgb();
+            this._updateHexFromRgb();
         }
     },
 
@@ -65,6 +70,8 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
 
         this._moveColorSelector(point);
         this._setSaturationAndValue(point);
+        this._updateRgbFromHsv();
+        this._updateHexFromRgb();
     },
 
     _changeHue : function(e) {
@@ -81,6 +88,8 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
 
         this._moveHueSelector(y);
         this._setHue(y);
+        this._updateRgbFromHsv();
+        this._updateHexFromRgb();
     },
 
     _setRgb: function(rgbColor) {
@@ -115,6 +124,41 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
 
     _moveHueSelector : function(y) {
         this._hueSelector.setStyle('top', y - 8);
+    },
+
+    _updateRgbFromHsv : function() {
+        var h = this._h.get('value'),
+            s = this._s.get('value'),
+            v = this._v.get('value'),
+            hsvStr = Y.Color.fromArray([h, s, v], Y.Color.TYPES.HSV),
+            rgbArr = Y.Color._hsvToRgb(hsvStr, true),
+            hexStr = Y.Color.toHex(hsvStr);
+
+        this._r.set('value', rgbArr[0]);
+        this._g.set('value', rgbArr[1]);
+        this._b.set('value', rgbArr[2]);
+    },
+
+    _updateHexFromRgb : function() {
+        var r = this._r.get('value'),
+            g = this._g.get('value'),
+            b = this._b.get('value'),
+            rgbStr = Y.Color.fromArray([r, g, b], Y.Color.TYPES.RGB),
+            hexStr = Y.Color.toHex(rgbStr);
+
+        this._hex.set('value', hexStr.substr(1));
+    },
+
+    _updateHsvFromRgb : function() {
+        var r = this._r.get('value'),
+            g = this._g.get('value'),
+            b = this._b.get('value'),
+            rgbStr = Y.Color.fromArray([r, g, b], Y.Color.TYPES.RGB),
+            hsvArr = Y.Color._rgbToHsv(rgbStr, true);
+
+        this._h.set('value', hsvArr[0]);
+        this._s.set('value', hsvArr[1]);
+        this._v.set('value', hsvArr[2]);
     }
 }, {
     ATTRS : {
