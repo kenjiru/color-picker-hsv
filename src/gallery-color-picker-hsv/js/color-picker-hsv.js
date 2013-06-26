@@ -223,11 +223,14 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
             'left' : point.x - 8,
             'top' : point.y - 8
         });
+
+        this._updateSelectedColor();
     },
 
     _moveHueSelector : function(y) {
         this._hueSelector.setStyle('top', y - 8);
 
+        this._updateSelectedColor();
         this._updateBaseColor();
     },
 
@@ -238,6 +241,12 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
             hexStr = Y.Color.toHex(rgbStr);
 
         this._colorControl.setStyle('background-color', hexStr);
+    },
+
+    _updateSelectedColor : function() {
+        var hex = this._hex.get('value');
+
+        this._selectedColor.setStyle('background-color', '#' + hex);
     }
 }, {
     ATTRS : {
