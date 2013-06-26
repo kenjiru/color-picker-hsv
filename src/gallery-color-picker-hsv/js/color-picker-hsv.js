@@ -16,7 +16,8 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
     },
 
     renderUI : function() {
-        var contentBox = this.get('contentBox');
+        var contentBox = this.get('contentBox'),
+            color = this.get('color');
 
         contentBox.append(COLOR_PICKER_HSV_TEMPLATE);
 
@@ -33,6 +34,10 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._h = contentBox.one('#h');
         this._s = contentBox.one('#s');
         this._v = contentBox.one('#v');
+
+        if (color) {
+            this._setRgb(color);
+        }
     },
 
     bindUI : function() {
@@ -78,6 +83,15 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._setHue(y);
     },
 
+    _setRgb: function(rgbColor) {
+        var rgbStr = Y.Color.toRGB(rgbColor),
+            rgbArr = Y.Color.toArray(rgbStr);
+
+        this._r.set('value', rgbArr[0]);
+        this._g.set('value', rgbArr[1]);
+        this._b.set('value', rgbArr[2]);
+    },
+
     _setSaturationAndValue : function(point) {
         var s = parseInt(100*(Math.max(0,Math.min(150, point.x)))/150, 10),
             v = parseInt(100*(150 - Math.max(0,Math.min(150, point.y)))/150, 10);
@@ -101,5 +115,9 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
 
     _moveHueSelector : function(y) {
         this._hueSelector.setStyle('top', y - 8);
+    }
+}, {
+    ATTRS : {
+        color : null
     }
 });
