@@ -22,17 +22,20 @@ Y.ColorPickerHsb = Y.Base.create('colorPickerHsb', Y.Widget, [], {
     },
 
     bindUI : function() {
-        this._colorControl.on('click', this.onColorClick, this);
-        this._hueControl.on('click', this.onHueClick, this);
+        this._colorControl.on('mousedown', this._moveColorSelector, this);
+        this._colorControl.on('mousemove', this._moveColorSelector, this);
+
+        this._hueControl.on('mousedown', this._moveHueSelector, this);
+        this._hueControl.on('mousemove', this._moveHueSelector, this);
     },
 
-    onColorClick : function(e) {
+    _moveColorSelector: function(e) {
         var xy, x, y;
 
         // left click
         if (e.button == 1) {
-            xy = this._colorControl.getXY(),
-            x = e.pageX - xy[0],
+            xy = this._colorControl.getXY();
+            x = e.pageX - xy[0];
             y = e.pageY - xy[1];
 
             console.log(x + ', ' + y);
@@ -44,7 +47,7 @@ Y.ColorPickerHsb = Y.Base.create('colorPickerHsb', Y.Widget, [], {
         }
     },
 
-    onHueClick : function(e) {
+    _moveHueSelector : function(e) {
         var controlY, mouseY, y;
 
         // left click
