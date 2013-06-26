@@ -1,6 +1,7 @@
 Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
     CONTENT_TEMPLATE : null,
-    _colorControl: null,
+    _selectedColor : null,
+    _colorControl : null,
     _colorSelector : null,
     _hueControl : null,
     _hueSelector : null,
@@ -21,6 +22,8 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
             color = this.get('color');
 
         contentBox.append(COLOR_PICKER_HSV_TEMPLATE);
+
+        this._selectedColor = contentBox.one('.selected-color');
 
         this._colorControl = contentBox.one('.color-control');
         this._colorSelector = contentBox.one('.color-selector');
@@ -224,6 +227,17 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
 
     _moveHueSelector : function(y) {
         this._hueSelector.setStyle('top', y - 8);
+
+        this._updateBaseColor();
+    },
+
+    _updateBaseColor : function() {
+        var h = this._h.get('value'),
+            hsvStr = Y.Color.fromArray([h, 100, 100], Y.Color.TYPES.HSV),
+            rgbStr = Y.Color._hsvToRgb(hsvStr),
+            hexStr = Y.Color.toHex(rgbStr);
+
+        this._colorControl.setStyle('background-color', hexStr);
     }
 }, {
     ATTRS : {
