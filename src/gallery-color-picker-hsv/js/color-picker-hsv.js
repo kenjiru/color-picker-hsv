@@ -105,6 +105,8 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._setSaturationAndValue(point);
         this._updateRgbFromHsv(false);
         this._updateHexFromRgb(false);
+
+        e.halt();
     },
 
     _changeHue : function(e) {
@@ -123,6 +125,8 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._setHue(y);
         this._updateRgbFromHsv(false);
         this._updateHexFromRgb(false);
+
+        e.halt();
     },
 
     _rgbChanged : function() {
