@@ -76,6 +76,7 @@
 
 .value input {
     width: 35px;
+    margin: 2px;
 }
 
 .value input#hex {
@@ -86,5 +87,5 @@
     width: 40px;
     height: 30px;
     border: 1px solid gray;
-    margin: 5px;
+    margin: 5px 0 5px 10px;
 }
