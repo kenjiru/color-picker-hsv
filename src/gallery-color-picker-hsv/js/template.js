@@ -9,31 +9,31 @@ var COLOR_PICKER_HSV_TEMPLATE = "" +
     "   <div class='selected-color'></div>" +
     "   <div class='value rgb'>" +
     "       <label for='r'>R</label>" +
-    "       <input id='r'/>" +
+    "       <input id='r' size='3' maxlength='3'/>" +
     "   </div>" +
     "   <div class='value hsv'>" +
     "       <label for='h'>H</label>" +
-    "       <input id='h'/>" +
+    "       <input id='h' size='3' maxlength='3'/>" +
     "   </div>" +
     "   <div class='value rgb'>" +
     "       <label for='g'>G</label>" +
-    "       <input id='g'/>" +
+    "       <input id='g' size='3' maxlength='3'/>" +
     "   </div>" +
     "   <div class='value hsv'>" +
     "       <label for='s'>S</label>" +
-    "       <input id='s'/>" +
+    "       <input id='s' size='3' maxlength='3'/>" +
     "   </div>" +
     "   <div class='value rgb'>" +
     "       <label for='b'>B</label>" +
-    "       <input id='b'/>" +
+    "       <input id='b' size='3' maxlength='3'/>" +
     "   </div>" +
     "   <div class='value hsv'>" +
     "       <label for='v'>V</label>" +
-    "       <input id='v'/>" +
+    "       <input id='v' size='3' maxlength='3'/>" +
     "   </div>" +
     "   <div class='value hex'>" +
     "       <label for='hex'>#</label>" +
-    "       <input id='hex'/>" +
+    "       <input id='hex' size='6' maxlength='6'/>" +
     "   </div>" +
     "</div>";
 
