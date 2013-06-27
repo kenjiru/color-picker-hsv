@@ -51,15 +51,27 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
     bindUI : function() {
         var contentBox = this.get('contentBox');
 
-        this._colorControl.on('mousedown', this._changeColor, this);
-        this._colorControl.on('mousemove', this._changeColor, this);
-
-        this._hueControl.on('mousedown', this._changeHue, this);
-        this._hueControl.on('mousemove', this._changeHue, this);
+        this._colorControl.on('mousedown', this._colorMouseDown, this);
+        this._hueControl.on('mousedown', this._hueMouseDown, this);
 
         contentBox.delegate('valuechange', this._rgbChanged, '.rgb input', this);
         contentBox.delegate('valuechange', this._hsvChanged, '.hsv input', this);
         contentBox.delegate('valuechange', this._hexChanged, '.hex input', this);
+    },
+
+    _colorMouseDown : function(e) {
+        this._mouseMoveSub = Y.on('mousemove', this._changeColor, null, this);
+        this._mouseUpSub = Y.on('mouseup', this._clearMouseSubs, null, this);
+    },
+
+    _hueMouseDown : function(e) {
+        this._mouseMoveSub = Y.on('mousemove', this._changeHue, null, this);
+        this._mouseUpSub = Y.on('mouseup', this._clearMouseSubs, null, this);
+    },
+
+    _clearMouseSubs : function() {
+        this._mouseMoveSub.detach();
+        this._mouseUpSub.detach();
     },
 
     _changeColor : function(e) {
