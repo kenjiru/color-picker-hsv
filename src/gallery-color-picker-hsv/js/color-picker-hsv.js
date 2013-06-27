@@ -12,6 +12,8 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
     _s : null,
     _v : null,
     _hex : null,
+    _mouseMoveSub : null,
+    _mouseUpSub : null,
 
     initializer : function(config) {
         console.log('ColorPickerHsv initialized!');
@@ -87,22 +89,20 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
     },
 
     _changeColor : function(e) {
-        var controlPosition, point;
+        var controlPosition, x, y;
 
         // check for left click pressed
         if (e.button !== 1)
             return;
 
         controlPosition = this._colorControl.getXY();
-        point = {
-            x: e.pageX - controlPosition[0],
-            y: e.pageY - controlPosition[1]
-        };
+        x = e.pageX - controlPosition[0];
+        y = e.pageY - controlPosition[1];
 
-        console.log(point.x + ', ' + point.y);
+        console.log(x + ', ' + y);
 
-        this._moveColorSelector(point);
-        this._setSaturationAndValue(point);
+        this._moveColorSelector(x, y);
+        this._setSaturationAndValue(x, y);
         this._updateRgbFromHsv(false);
         this._updateHexFromRgb(false);
 
@@ -159,9 +159,9 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._b.set('value', rgbArr[2]);
     },
 
-    _setSaturationAndValue : function(point) {
-        var s = parseInt(100*(Math.max(0,Math.min(150, point.x)))/150, 10),
-            v = parseInt(100*(150 - Math.max(0,Math.min(150, point.y)))/150, 10);
+    _setSaturationAndValue : function(x, y) {
+        var s = parseInt(100*(Math.max(0,Math.min(150, x)))/150, 10),
+            v = parseInt(100*(150 - Math.max(0,Math.min(150, y)))/150, 10);
 
         this._s.set('value', s);
         this._v.set('value', v);
@@ -233,10 +233,10 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         var s = this._s.get('value'),
             v = this._v.get('value');
 
-        this._moveColorSelector({
-            x: parseInt(150 * s/100, 10),
-            y: parseInt(150 * (100-v)/100, 10)
-        });
+        this._moveColorSelector(
+            parseInt(150 * s/100, 10),
+            parseInt(150 * (100-v)/100, 10)
+        );
     },
 
     _updateHueSelector : function() {
@@ -246,17 +246,22 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._moveHueSelector(y);
     },
 
-    _moveColorSelector : function(point) {
+    _moveColorSelector : function(x, y) {
+        x = this._minMax(x, 0, 150);
+        y = this._minMax(y, 0, 150);
+
         this._colorSelector.setStyles({
-            'left' : point.x - 8,
-            'top' : point.y - 8
+            'left' : x - 7,
+            'top' : y - 7
         });
 
         this._updateSelectedColor();
     },
 
     _moveHueSelector : function(y) {
-        this._hueSelector.setStyle('top', y - 8);
+        y = this._minMax(y, 0, 150);
+
+        this._hueSelector.setStyle('top', y - 5);
 
         this._updateSelectedColor();
         this._updateBaseColor();
@@ -275,6 +280,10 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         var hex = this._hex.get('value');
 
         this._selectedColor.setStyle('background-color', '#' + hex);
+    },
+
+    _minMax : function(value, min, max) {
+        return Math.min(Math.max(value, min), max);
     }
 }, {
     ATTRS : {
