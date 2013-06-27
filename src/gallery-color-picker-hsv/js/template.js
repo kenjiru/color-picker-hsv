@@ -36,3 +36,4 @@ var COLOR_PICKER_HSV_TEMPLATE = "" +
     "       <input id='hex'/>" +
     "   </div>" +
     "</div>";
+

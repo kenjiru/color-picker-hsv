@@ -5,12 +5,13 @@
 YUI_config = {
     filter: "raw",
     debug: true,
-    combine: false,
+    combine: true,
     base: 'http://yui.yahooapis.com/3.10.3/build/',
 
     groups: {
         ColorPickerModules: {
             base: '/build/',
+            combine: false,
 
             modules: {
                 'gallery-color-picker-hsv' : {
