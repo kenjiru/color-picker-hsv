@@ -60,18 +60,30 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
     },
 
     _colorMouseDown : function(e) {
+        this._clearMouseSubs();
         this._mouseMoveSub = Y.on('mousemove', this._changeColor, null, this);
         this._mouseUpSub = Y.on('mouseup', this._clearMouseSubs, null, this);
+
+        this._changeColor(e);
     },
 
     _hueMouseDown : function(e) {
+        this._clearMouseSubs();
         this._mouseMoveSub = Y.on('mousemove', this._changeHue, null, this);
         this._mouseUpSub = Y.on('mouseup', this._clearMouseSubs, null, this);
+
+        this._changeHue(e);
     },
 
     _clearMouseSubs : function() {
-        this._mouseMoveSub.detach();
-        this._mouseUpSub.detach();
+        if (this._mouseMoveSub) {
+            this._mouseMoveSub.detach();
+            this._mouseMoveSub = null;
+        }
+        if (this._mouseUpSub) {
+            this._mouseUpSub.detach();
+            this._mouseUpSub = null;
+        }
     },
 
     _changeColor : function(e) {
