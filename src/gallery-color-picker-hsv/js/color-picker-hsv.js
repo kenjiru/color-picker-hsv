@@ -273,13 +273,17 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
             rgbStr = Y.Color._hsvToRgb(hsvStr),
             hexStr = Y.Color.toHex(rgbStr);
 
-        this._colorControl.setStyle('background-color', hexStr);
+        if (hexStr) {
+            this._colorControl.setStyle('background-color', hexStr);
+        }
     },
 
     _updateSelectedColor : function() {
         var hex = this._hex.get('value');
 
-        this._selectedColor.setStyle('background-color', '#' + hex);
+        if (hex) {
+            this._selectedColor.setStyle('background-color', '#' + hex);
+        }
     },
 
     _minMax : function(value, min, max) {
