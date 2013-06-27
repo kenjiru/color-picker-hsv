@@ -9,7 +9,7 @@ var COLOR_PICKER_HSV_TEMPLATE = "" +
     "   <div class='selected-color'></div>" +
     "   <div class='value rgb'>" +
     "       <label for='r'>R</label>" +
-    "       <input id='r' size='3' maxlength='3'/>" +
+    "       <input id='r' size='3' maxlength='3' min='0' max='50'/>" +
     "   </div>" +
     "   <div class='value hsv'>" +
     "       <label for='h'>H</label>" +

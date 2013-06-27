@@ -48,6 +48,8 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
             this._updateHsvFromRgb();
             this._updateHexFromRgb();
         }
+
+        InputValidator.attachToInputs(contentBox);
     },
 
     bindUI : function() {
