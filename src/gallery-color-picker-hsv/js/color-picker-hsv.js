@@ -274,7 +274,7 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
             hexStr = Y.Color.toHex(rgbStr);
 
         if (hexStr) {
-            this._colorControl.setStyle('background-color', hexStr);
+            this._colorControl.setStyle('backgroundColor', hexStr);
         }
     },
 
@@ -282,7 +282,7 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         var hex = this._hex.get('value');
 
         if (hex) {
-            this._selectedColor.setStyle('background-color', '#' + hex);
+            this._selectedColor.setStyle('backgroundColor', '#' + hex);
         }
     },
 
