@@ -9,7 +9,7 @@ var COLOR_PICKER_HSV_TEMPLATE = "" +
     "   <div class='selected-color'></div>" +
     "   <div class='value rgb'>" +
     "       <label for='r'>R</label>" +
-    "       <input id='r' size='3' maxlength='3' min='0' max='50'/>" +
+    "       <input id='r' size='3' maxlength='3' min='0' max='255'/>" +
     "   </div>" +
     "   <div class='value hsv'>" +
     "       <label for='h'>H</label>" +
@@ -17,7 +17,7 @@ var COLOR_PICKER_HSV_TEMPLATE = "" +
     "   </div>" +
     "   <div class='value rgb'>" +
     "       <label for='g'>G</label>" +
-    "       <input id='g' size='3' maxlength='3' min='0' max='50'/>" +
+    "       <input id='g' size='3' maxlength='3' min='0' max='255'/>" +
     "   </div>" +
     "   <div class='value hsv'>" +
     "       <label for='s'>S</label>" +
@@ -25,7 +25,7 @@ var COLOR_PICKER_HSV_TEMPLATE = "" +
     "   </div>" +
     "   <div class='value rgb'>" +
     "       <label for='b'>B</label>" +
-    "       <input id='b' size='3' maxlength='3' min='0' max='50'/>" +
+    "       <input id='b' size='3' maxlength='3' min='0' max='255'/>" +
     "   </div>" +
     "   <div class='value hsv'>" +
     "       <label for='v'>V</label>" +
