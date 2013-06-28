@@ -43,11 +43,7 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
 
         this._hex = contentBox.one('#hex');
 
-        if (color) {
-            this._setRgb(color);
-            this._updateHsvFromRgb();
-            this._updateHexFromRgb();
-        }
+        this._setHexColor(this.get('color') || '#000000');
     },
 
     bindUI : function() {
@@ -99,8 +95,6 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         x = e.pageX - controlPosition[0];
         y = e.pageY - controlPosition[1];
 
-        console.log(x + ', ' + y);
-
         this._moveColorSelector(x, y);
         this._setSaturationAndValue(x, y);
         this._updateRgbFromHsv(false);
@@ -118,8 +112,6 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
 
         controlY = this._hueControl.getY();
         y = e.pageY - controlY;
-
-        console.log(y);
 
         this._moveHueSelector(y);
         this._setHue(y);
@@ -170,11 +162,9 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
     },
 
     _checkHexInput : function(e) {
-        var input = e.currentTarget,
-            newVal = e.newVal,
-            isValid = /(^[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(newVal);
+        var input = e.currentTarget;
 
-        if (!isValid) {
+        if (!this._isValidHexColor(e.newVal) && e.newVal[0] !== '#') {
             input.addClass('invalid');
 
             return false;
@@ -184,13 +174,8 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         return true;
     },
 
-    _setRgb: function(rgbColor) {
-        var rgbStr = Y.Color.toRGB(rgbColor),
-            rgbArr = Y.Color.toArray(rgbStr);
-
-        this._r.set('value', rgbArr[0]);
-        this._g.set('value', rgbArr[1]);
-        this._b.set('value', rgbArr[2]);
+    _isValidHexColor : function(str) {
+        return /(^#*[0-9A-F]{6}$)|(^#*[0-9A-F]{3}$)/i.test(str);
     },
 
     _setSaturationAndValue : function(x, y) {
@@ -322,9 +307,37 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
 
     _minMax : function(value, min, max) {
         return Math.min(Math.max(value, min), max);
+    },
+
+    _getHexColor : function(color) {
+        if (this._hex && this._hex.get('value')) {
+            return '#' + this._hex.get('value');
+        }
+
+        return '';
+    },
+
+    _setHexColor : function(color) {
+        if (this._hex && this._isValidHexColor(color)) {
+            if (color[0] == '#')
+                color = color.substr(1);
+
+            this._hex.set('value', color);
+            this._updateRgbFromHex();
+            this._updateHsvFromRgb();
+        }
     }
 }, {
     ATTRS : {
-        color : null
+        color : {
+            getter : function() {
+                return this._getHexColor();
+            },
+            setter : function(value) {
+                this._setHexColor(value);
+
+                return value;
+            }
+        }
     }
 });
