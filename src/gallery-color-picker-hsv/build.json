@@ -3,7 +3,6 @@
     "builds": {
         "gallery-color-picker-hsv": {
             "jsfiles": [
-                "input-validator.js",
                 "template.js",
                 "color-picker-hsv.js"
             ],
