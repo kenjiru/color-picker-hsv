@@ -48,8 +48,6 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
             this._updateHsvFromRgb();
             this._updateHexFromRgb();
         }
-
-        InputValidator.attachToInputs(contentBox);
     },
 
     bindUI : function() {
@@ -131,25 +129,57 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         e.halt();
     },
 
-    _rgbChanged : function() {
-        console.log('_rgbChanged');
+    _rgbChanged : function(e) {
+        if (this._checkNumberInput(e) == false)
+            return;
 
         this._updateHsvFromRgb();
         this._updateHexFromRgb();
     },
 
-    _hsvChanged : function() {
-        console.log('_hsvChanged');
+    _hsvChanged : function(e) {
+        if (this._checkNumberInput(e) == false)
+            return;
 
         this._updateRgbFromHsv();
         this._updateHexFromRgb();
     },
 
-    _hexChanged : function() {
-        console.log('_hexChanged');
+    _hexChanged : function(e) {
+        if (this._checkHexInput(e) == false)
+            return;
 
         this._updateRgbFromHex();
         this._updateHsvFromRgb();
+    },
+
+    _checkNumberInput : function(e) {
+        var input = e.currentTarget,
+            newVal = parseInt(e.newVal),
+            min = input.getAttribute('min'),
+            max = input.getAttribute('max');
+
+        if (!Y.Lang.isNumber(newVal) || newVal < min || newVal > max) {
+            input.set(e.prevVal);
+
+            return false;
+        }
+
+        return true;
+    },
+
+    _checkHexInput : function(e) {
+        var input = e.currentTarget,
+            newVal = e.newVal,
+            isValid = /(^[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(newVal);
+
+        if (!isValid) {
+            input.set(e.prevVal);
+
+            return false;
+        }
+
+        return true;
     },
 
     _setRgb: function(rgbColor) {
