@@ -77,6 +77,11 @@
 .value input {
     width: 35px;
     margin: 2px;
+    border: 1px solid gray;
+}
+
+.value input.invalid {
+    border: 1px solid red;
 }
 
 .value input#hex {

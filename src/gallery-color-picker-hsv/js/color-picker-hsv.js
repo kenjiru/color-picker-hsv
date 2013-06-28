@@ -161,9 +161,11 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
 
         if (!Y.Lang.isNumber(newVal) || newVal < min || newVal > max) {
             input.set(e.prevVal);
+            input.addClass('invalid');
 
             return false;
         }
+        input.removeClass('invalid');
 
         return true;
     },
@@ -175,9 +177,11 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
 
         if (!isValid) {
             input.set(e.prevVal);
+            input.addClass('invalid');
 
             return false;
         }
+        input.removeClass('invalid');
 
         return true;
     },
