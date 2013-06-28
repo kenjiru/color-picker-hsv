@@ -160,7 +160,6 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
             max = input.getAttribute('max');
 
         if (!Y.Lang.isNumber(newVal) || newVal < min || newVal > max) {
-            input.set(e.prevVal);
             input.addClass('invalid');
 
             return false;
@@ -176,7 +175,6 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
             isValid = /(^[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(newVal);
 
         if (!isValid) {
-            input.set(e.prevVal);
             input.addClass('invalid');
 
             return false;
