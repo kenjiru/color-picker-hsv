@@ -1,9 +1,7 @@
 .yui3-colorpickerhsv {
-    position: absolute;
-    top: 100px;
-    left: 100px;
-    border: 1px solid black;
-    padding: 10px;
+    width: 370px;
+    border: 1px solid lightgray;
+    padding: 5px;
 }
 
 /* clear the float left */
@@ -78,6 +76,7 @@
     width: 35px;
     margin: 2px;
     border: 1px solid gray;
+    padding-left: 3px;
 }
 
 .value input.invalid {
