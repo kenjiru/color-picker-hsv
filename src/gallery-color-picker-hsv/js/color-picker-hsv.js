@@ -192,7 +192,7 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._h.set('value', h);
     },
 
-    _updateRgbFromHsv : function(moveColorSelector) {
+    _updateRgbFromHsv : function(moveHueSelector) {
         var h = this._h.get('value'),
             s = this._s.get('value'),
             v = this._v.get('value'),
@@ -203,8 +203,8 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._g.set('value', rgbArr[1]);
         this._b.set('value', rgbArr[2]);
 
-        if (typeof moveColorSelector == 'undefined' || moveColorSelector) {
-            this._updateColorSelector();
+        if (typeof moveHueSelector == 'undefined' || moveHueSelector) {
+            this._updateHueSelector();
         }
     },
 
@@ -217,7 +217,7 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._g.set('value', rgbArr[1]);
         this._b.set('value', rgbArr[2]);
 
-        this._updateHueSelector();
+        this._updateColorSelector();
     },
 
     _updateHexFromRgb : function(moveHueSelector) {
@@ -230,7 +230,7 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._hex.set('value', hexStr.substr(1));
 
         if (typeof moveHueSelector == 'undefined' || moveHueSelector) {
-            this._updateHueSelector();
+            this._updateColorSelector();
         }
     },
 
@@ -245,7 +245,7 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._s.set('value', hsvArr[1]);
         this._v.set('value', hsvArr[2]);
 
-        this._updateColorSelector();
+        this._updateHueSelector();
     },
 
     _updateColorSelector : function() {
