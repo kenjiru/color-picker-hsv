@@ -1,6 +1,6 @@
 .yui3-colorpickerhsv {
     width: 370px;
-    border: 1px solid lightgray;
+    border: 0;
     padding: 5px;
 }
 
@@ -54,7 +54,7 @@
     margin-left: 10px;
     width: 170px;
     height: 150px;
-    border: 1px solid grey;
+    border: 1px solid lightgrey;
 }
 
 .values .value {
