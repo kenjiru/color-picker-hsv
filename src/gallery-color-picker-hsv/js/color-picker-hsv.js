@@ -59,32 +59,21 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
 
     _colorMouseDown : function(e) {
         this._clearMouseSubs();
-        this._mouseMoveSub = Y.one(document).on('mousemove', this._changeColor, this);
+        this._mouseMoveSub = Y.one(document).on('mousemove', this._colorSelectorMoved, this);
         this._mouseUpSub = Y.one(document).on('mouseup', this._clearMouseSubs, this);
 
-        this._changeColor(e);
+        this._colorSelectorMoved(e);
     },
 
     _hueMouseDown : function(e) {
         this._clearMouseSubs();
-        this._mouseMoveSub = Y.one(document).on('mousemove', this._changeHue, this);
+        this._mouseMoveSub = Y.one(document).on('mousemove', this._hueSelectorMoved, this);
         this._mouseUpSub = Y.one(document).on('mouseup', this._clearMouseSubs, this);
 
-        this._changeHue(e);
+        this._hueSelectorMoved(e);
     },
 
-    _clearMouseSubs : function() {
-        if (this._mouseMoveSub) {
-            this._mouseMoveSub.detach();
-            this._mouseMoveSub = null;
-        }
-        if (this._mouseUpSub) {
-            this._mouseUpSub.detach();
-            this._mouseUpSub = null;
-        }
-    },
-
-    _changeColor : function(e) {
+    _colorSelectorMoved : function(e) {
         var controlPosition, x, y;
 
         // check for left click pressed
@@ -103,7 +92,7 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         e.halt();
     },
 
-    _changeHue : function(e) {
+    _hueSelectorMoved : function(e) {
         var controlY, y;
 
         // left click
@@ -119,6 +108,17 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._updateHexFromRgb(false);
 
         e.halt();
+    },
+
+    _clearMouseSubs : function() {
+        if (this._mouseMoveSub) {
+            this._mouseMoveSub.detach();
+            this._mouseMoveSub = null;
+        }
+        if (this._mouseUpSub) {
+            this._mouseUpSub.detach();
+            this._mouseUpSub = null;
+        }
     },
 
     _rgbChanged : function(e) {
@@ -172,10 +172,6 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         input.removeClass('invalid');
 
         return true;
-    },
-
-    _isValidHexColor : function(str) {
-        return /(^#*[0-9A-F]{6}$)|(^#*[0-9A-F]{3}$)/i.test(str);
     },
 
     _setSaturationAndValue : function(x, y) {
@@ -305,10 +301,6 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         }
     },
 
-    _minMax : function(value, min, max) {
-        return Math.min(Math.max(value, min), max);
-    },
-
     _getHexColor : function(color) {
         if (this._hex && this._hex.get('value')) {
             return '#' + this._hex.get('value');
@@ -326,6 +318,14 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
             this._updateRgbFromHex();
             this._updateHsvFromRgb();
         }
+    },
+
+    _minMax : function(value, min, max) {
+        return Math.min(Math.max(value, min), max);
+    },
+
+    _isValidHexColor : function(str) {
+        return /(^#*[0-9A-F]{6}$)|(^#*[0-9A-F]{3}$)/i.test(str);
     }
 }, {
     ATTRS : {
