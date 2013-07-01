@@ -1,6 +1,6 @@
 .yui3-colorpickerhsv {
     width: 370px;
-    border: 0;
+    border: 1px solid lightgray;
     padding: 5px;
 }
 
