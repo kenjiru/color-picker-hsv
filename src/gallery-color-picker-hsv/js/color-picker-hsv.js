@@ -17,6 +17,8 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
 
     initializer : function(config) {
         console.log('ColorPickerHsv initialized!');
+
+        this.publish('colorChanged');
     },
 
     renderUI : function() {
@@ -143,6 +145,7 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
 
         this._updateRgbFromHex();
         this._updateHsvFromRgb();
+        this._fireColorChangedEvent();
     },
 
     _checkNumberInput : function(e) {
@@ -228,6 +231,8 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         if (typeof moveHueSelector == 'undefined' || moveHueSelector) {
             this._updateColorSelector();
         }
+
+        this._fireColorChangedEvent();
     },
 
     _updateHsvFromRgb : function() {
@@ -301,7 +306,7 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         }
     },
 
-    _getHexColor : function(color) {
+    _getHexColor : function() {
         if (this._hex && this._hex.get('value')) {
             return '#' + this._hex.get('value');
         }
@@ -318,6 +323,14 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
             this._updateRgbFromHex();
             this._updateHsvFromRgb();
         }
+    },
+
+    _fireColorChangedEvent : function() {
+        console.log('colorChanged event!');
+
+        this.fire('colorChanged', {
+            color : this._getHexColor()
+        });
     },
 
     _minMax : function(value, min, max) {
