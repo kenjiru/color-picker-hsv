@@ -16,8 +16,6 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
     _mouseUpSub : null,
 
     initializer : function(config) {
-        console.log('ColorPickerHsv initialized!');
-
         this.publish('colorChanged');
     },
 
@@ -91,6 +89,8 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._updateRgbFromHsv(false);
         this._updateHexFromRgb(false);
 
+        this._updateSelectedColor();
+
         e.halt();
     },
 
@@ -108,6 +108,9 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         this._setHue(y);
         this._updateRgbFromHsv(false);
         this._updateHexFromRgb(false);
+
+        this._updateBaseColor();
+        this._updateSelectedColor();
 
         e.halt();
     },
@@ -326,8 +329,6 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
     },
 
     _fireColorChangedEvent : function() {
-        console.log('colorChanged event!');
-
         this.fire('colorChanged', {
             color : this._getHexColor()
         });
