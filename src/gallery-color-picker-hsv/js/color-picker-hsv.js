@@ -153,7 +153,7 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
 
     _checkNumberInput : function(e) {
         var input = e.currentTarget,
-            newVal = parseInt(e.newVal),
+            newVal = parseInt(e.newVal, 10),
             min = input.getAttribute('min'),
             max = input.getAttribute('max');
 
