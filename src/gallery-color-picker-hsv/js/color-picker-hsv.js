@@ -153,13 +153,18 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
 
     _checkNumberInput : function(e) {
         var input = e.currentTarget,
-            newVal = parseInt(e.newVal, 10),
+            val = e.newVal,
             min = input.getAttribute('min'),
             max = input.getAttribute('max');
 
-        if (!Y.Lang.isNumber(newVal) || newVal < min || newVal > max) {
+        if (!this._isNumber(val)) {
             input.addClass('invalid');
+            return false;
+        }
+        val = parseInt(val, 10);
 
+        if (val < min || val > max) {
+            input.addClass('invalid');
             return false;
         }
         input.removeClass('invalid');
@@ -167,12 +172,15 @@ Y.ColorPickerHsv = Y.Base.create('colorPickerHsv', Y.Widget, [], {
         return true;
     },
 
+    _isNumber : function(val) {
+        return val && !isNaN(val) && /^\d*\.{0,1}\d*$/.test(val);
+    },
+
     _checkHexInput : function(e) {
         var input = e.currentTarget;
 
         if (!this._isValidHexColor(e.newVal) && e.newVal[0] !== '#') {
             input.addClass('invalid');
-
             return false;
         }
         input.removeClass('invalid');
